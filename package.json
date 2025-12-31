@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "npx playwright test",
-    "report": "allure generate allure-results -o allure-report --clean && allure open allure-report"
+    "report": "allure generate allure-results -o allure-report --clean && allure open allure-report",
+    "report:excel": "node scripts/generate-excel-report.js"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,7 @@
     "allure-commandline": "^2.36.0",
     "allure-playwright": "^3.4.3",
     "dotenv": "^17.2.3",
+    "exceljs": "^4.4.0",
     "supertest": "^7.1.4"
   }
 }
