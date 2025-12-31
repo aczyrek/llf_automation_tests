@@ -1,0 +1,29 @@
+{
+  "name": "llf_automation_tests",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx playwright test",
+    "report": "allure generate allure-results -o allure-report --clean && allure open allure-report"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aczyrek/llf_automation_tests.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/aczyrek/llf_automation_tests/issues"
+  },
+  "homepage": "https://github.com/aczyrek/llf_automation_tests#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.57.0",
+    "allure-commandline": "^2.36.0",
+    "allure-playwright": "^3.4.3",
+    "dotenv": "^17.2.3",
+    "supertest": "^7.1.4"
+  }
+}
