@@ -10,6 +10,10 @@ on:
 
 jobs:
   test:
+    strategy:
+      fail-fast: false
+      matrix:
+        project: [chromium, firefox, webkit, "Mobile Chrome", "Mobile Safari"]
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
@@ -26,8 +30,8 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
 
-    - name: Run Playwright tests (Chromium only)
-      run: npx playwright test --project=chromium
+    - name: Run Playwright tests (${{ matrix.project }})
+      run: npx playwright test --project="${{ matrix.project }}"
       env:
         BASE_URL: ${{ secrets.BASE_URL || 'https://online.futbolas.tv' }}
         TEST_USER_EMAIL: ${{ secrets.TEST_USER_EMAIL }}
@@ -38,24 +42,24 @@ jobs:
       if: always()
       run: npm run report:excel
 
-    - name: Upload Playwright Report
+    - name: Upload Playwright Report (${{ matrix.project }})
       uses: actions/upload-artifact@v4
       if: always()
       with:
-        name: playwright-report
+        name: playwright-report-${{ matrix.project }}
         path: playwright-report/
         retention-days: 30
 
     - uses: actions/upload-artifact@v4
       if: always()
       with:
-        name: excel-report
+        name: excel-report-${{ matrix.project }}
         path: test-report.xlsx
         retention-days: 30
 
     - uses: actions/upload-artifact@v4
       if: always()
       with:
-        name: allure-results
+        name: allure-results-${{ matrix.project }}
         path: allure-results/
         retention-days: 30
