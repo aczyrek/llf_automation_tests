@@ -7,7 +7,7 @@ class BasePage {
   }
 
   async navigateTo(path = '/') {
-    await this.page.goto(path);
+    return await this.page.goto(path, { waitUntil: 'domcontentloaded' });
   }
 
   async getTitle() {

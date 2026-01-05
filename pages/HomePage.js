@@ -26,7 +26,7 @@ class HomePage extends BasePage {
   }
 
   async navigate() {
-    await super.navigateTo('/lt/home');
+    return await super.navigateTo('/lt/home');
   }
 
   async clickLogin() {

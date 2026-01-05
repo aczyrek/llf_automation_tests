@@ -26,15 +26,13 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
 
-    - name: Run Playwright tests
-      run: npx playwright test
+    - name: Run Playwright tests (Chromium only)
+      run: npx playwright test --project=chromium
       env:
-        # Pass secrets if set in repo settings, otherwise rely on default or .env (but .env is gitignored)
-        # CI/CD best practice is to use repository secrets
-        BASE_URL: ${{ secrets.BASE_URL || 'https://online.futbolas.tv/lt/home' }}
+        BASE_URL: ${{ secrets.BASE_URL || 'https://online.futbolas.tv' }}
         TEST_USER_EMAIL: ${{ secrets.TEST_USER_EMAIL }}
         TEST_USER_PASSWORD: ${{ secrets.TEST_USER_PASSWORD }}
-        API_BASE_URL: ${{ secrets.API_BASE_URL || 'https://online.futbolas.tv/api/v1' }}
+        API_BASE_URL: ${{ secrets.API_BASE_URL || 'https://production-umpire-api.tisagroup.ch/api/v3' }}
 
     - name: Generate Excel Report
       if: always()

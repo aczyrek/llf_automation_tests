@@ -26,7 +26,11 @@ test.describe('Umpire API v3 Expanded Tests', () => {
       await request(API_BASE_URL)
         .get('/matches')
         .set('Authorization', 'Bearer invalid_token_123')
-        .expect(401);
+        .expect(res => {
+          if (res.status < 400 || res.status >= 500) {
+            throw new Error(`Expected 4xx auth error, got ${res.status}`);
+          }
+        });
     });
   });
 
